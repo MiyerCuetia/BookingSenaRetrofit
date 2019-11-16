@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "740843398662",
+    "firebase_url": "https://bookingsena-15561.firebaseio.com",
+    "project_id": "bookingsena-15561",
+    "storage_bucket": "bookingsena-15561.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740843398662:android:0bf9a8ab9047ba9e344587",
+        "android_client_info": {
+          "package_name": "co.edu.sena.bookingsena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740843398662-kfgkufragup41op2mi2qalfrcjpm4594.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOtuxmCsZ5wqTrZd8nY8KYkIyOg0a4c34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740843398662-kfgkufragup41op2mi2qalfrcjpm4594.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
