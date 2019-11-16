@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/escanear"
-        android:title="Escanear"
-        android:icon="@drawable/ic_center">
-    </item>
-    <item
-        android:id="@+id/inicio"
-        android:title="Historial"
-        android:icon="@drawable/ic_history">
-    </item>
-    <item
-        android:id="@+id/configuracion"
-        android:title="configuración"
-        android:icon="@drawable/ic_settings">
-    </item>
-    <item
-        android:id="@+id/alerta"
-        android:title="compartir"
-        android:icon="@drawable/ic_compartir">
-    </item>
-    <item
-        android:id="@+id/megusta"
-        android:title="Me gusta"
-        android:icon="@drawable/ic_thumb">
-    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/escanear"
+            android:title="Escanear"
+            android:icon="@drawable/ic_center">
+        </item>
+        <item
+            android:id="@+id/inicio"
+            android:title="Historial"
+            android:icon="@drawable/ic_history">
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/configuracion"
+            android:title="configuración"
+            android:icon="@drawable/ic_settings">
+        </item>
+        <item
+            android:id="@+id/alerta"
+            android:title="compartir"
+            android:icon="@drawable/ic_compartir">
+        </item>
+
+        <item
+            android:id="@+id/megusta"
+            android:title="Me gusta"
+            android:icon="@drawable/ic_thumb">
+        </item>
+    </group>
+
 
 </menu>
