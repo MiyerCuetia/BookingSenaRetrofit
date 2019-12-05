@@ -205,7 +205,7 @@ public class DescripcionAlo extends AppCompatActivity {
                 tvNumeroTelefonico.setText(alojamientoUtilVO1.getLugTelefono().toString());
                 tvDireccionCorreo.setText(alojamientoUtilVO1.getLugCorreo().toString());
                 tvTipoAlojamineto.setText(alojamientoUtilVO1.getTalNombre().toString());
-                tvDescAlojamiento.setText(alojamientoUtilVO1.getAloDescripcion().toString());
+                tvDescAlojamiento.setText(alojamientoUtilVO1.getLugDescripcion().toString());
 
             }
 

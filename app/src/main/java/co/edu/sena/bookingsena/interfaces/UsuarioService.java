@@ -16,6 +16,7 @@ import retrofit2.http.Query;
 public interface UsuarioService {
 
     String API_ROUTE_ALOJAMIENTO = "/alojamiento";
+    String API_ROUTE_GET_RESERVA= "/reserva";
     String API_ROUTE_LUGAR = "/lugar";
     String API_ROUTE_ALOJAMIENTOByID = "/alojamiento/{id}";
     String API_ROUTE_LUGARByID = "/lugar/{id}";
@@ -23,6 +24,9 @@ public interface UsuarioService {
 
     @GET(API_ROUTE_ALOJAMIENTO)
     Call<String> getAlojamiento();
+
+    @GET(API_ROUTE_GET_RESERVA)
+    Call<String> getReservaUsuario();
 
     @GET(API_ROUTE_LUGAR)
     Call<String> getLugar();

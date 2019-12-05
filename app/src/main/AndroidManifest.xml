@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DescripcionAlo"></activity>
+        <activity android:name=".ReservaUsuario"></activity>
+        <activity android:name=".DescripcionAlo" />
         <activity android:name=".Reserva" />
         <activity android:name=".GoogleMaps" />
 
@@ -27,7 +28,7 @@
             android:value="@integer/google_play_services_version" /> <!-- Agregué la API KEY al manifiest para poder utilizar la API de GoogleMaps -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAuCPgsQQP4stk8u51gJ8SS3Z-YNuaKtoE" />
+            android:value="TU_API_KEY" />
 
         <activity android:name=".Splash">
             <intent-filter>

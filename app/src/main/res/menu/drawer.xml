@@ -8,9 +8,9 @@
             android:icon="@drawable/ic_home">
         </item>
         <item
-            android:id="@+id/escanear"
-            android:title="Escanear"
-            android:icon="@drawable/ic_center">
+            android:id="@+id/reservas"
+            android:title="Reservas"
+            android:icon="@drawable/ic_reserva">
         </item>
     </group>
 

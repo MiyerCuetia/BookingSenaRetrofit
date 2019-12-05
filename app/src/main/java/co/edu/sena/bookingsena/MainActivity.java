@@ -150,8 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(inicio);
                 break;
 
-            case R.id.escanear:
-                Toast.makeText(this, "Escaner", Toast.LENGTH_SHORT).show();
+            case R.id.reservas:
+                Intent misreservas= new Intent(MainActivity.this,ReservaUsuario.class);
+                startActivity(misreservas);
                 break;
 
             case R.id.configuracion:

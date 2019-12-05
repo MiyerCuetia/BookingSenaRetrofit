@@ -305,8 +305,9 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                 startActivity(inicio);
                 break;
 
-            case R.id.escanear:
-                Toast.makeText(this, "Escaner", Toast.LENGTH_SHORT).show();
+            case R.id.reservas:
+                Intent misreservas= new Intent(AccountActivity.this,ReservaUsuario.class);
+                startActivity(misreservas);
                 break;
 
             case R.id.configuracion:
