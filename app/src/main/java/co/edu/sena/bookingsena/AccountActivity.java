@@ -9,6 +9,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -32,7 +35,8 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     public static final   String TAG = AccountActivity.class.getSimpleName();
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, signOut;
-    private EditText oldEmail, newEmail, password, newPassword;
+    private TextInputLayout tilNewPassword;
+    private EditText oldEmail, newEmail, newPassword;
     private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -63,6 +67,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
         btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
         changeEmail = (Button) findViewById(R.id.changeEmail);
+        tilNewPassword = (TextInputLayout) findViewById(R.id.til_newPassword);
         changePassword = (Button) findViewById(R.id.changePass);
         sendEmail = (Button) findViewById(R.id.send);
         remove = (Button) findViewById(R.id.remove);
@@ -70,12 +75,10 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
-        password = (EditText) findViewById(R.id.password);
         newPassword = (EditText) findViewById(R.id.newPassword);
 
         oldEmail.setVisibility(View.GONE);
         newEmail.setVisibility(View.GONE);
-        password.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
         changeEmail.setVisibility(View.GONE);
         changePassword.setVisibility(View.GONE);
@@ -91,7 +94,6 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.VISIBLE);
-                password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
                 changeEmail.setVisibility(View.VISIBLE);
                 changePassword.setVisibility(View.GONE);
@@ -109,17 +111,17 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(AccountActivity.this, "Email address is updated. Please sign in with new email!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AccountActivity.this, "La dirección de correo electrónico se ha actualizado. ¡Inicia sesión con el nuevo correo electrónico!", Toast.LENGTH_LONG).show();
                                         signOut();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(AccountActivity.this, "Failed to update email!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AccountActivity.this, "¡Error al actualizar el correo electrónico!", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
                 } else if (newEmail.getText().toString().trim().equals("")) {
-                    newEmail.setError("Enter email");
+                    newEmail.setError("Ingrese correo electrónico");
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -130,35 +132,57 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.VISIBLE);
                 sendEmail.setVisibility(View.GONE);
                 remove.setVisibility(View.GONE);
+
+                // visibilityToggle of Password eyes
+                newPassword.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        if(!s.equals("") ) {
+                            tilNewPassword.setPasswordVisibilityToggleEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
             }
         });
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
+
+
                 if (user != null && !newPassword.getText().toString().trim().equals("")) {
                     user.updatePassword(newPassword.getText().toString().trim())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(AccountActivity.this, "Password of email address is updated. Please sign in with new password!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AccountActivity.this, "La contraseña de la dirección de correo electrónico se ha actualizado. ¡Inicia sesión con la nueva contraseña!", Toast.LENGTH_LONG).show();
                                         signOut();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(AccountActivity.this, "Failed to update password!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AccountActivity.this, "¡Error al actualizar la contraseña!", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
                 } else if (newPassword.getText().toString().trim().equals("")) {
-                    newPassword.setError("Enter password");
+                    tilNewPassword.setPasswordVisibilityToggleEnabled(false); //oculta ver contraseña
+                    newPassword.setError("Ingrese contraseña");
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -169,7 +193,6 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             public void onClick(View v) {
                 oldEmail.setVisibility(View.VISIBLE);
                 newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.GONE);
@@ -187,16 +210,16 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(AccountActivity.this, "Reset password. email is sent!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this, "Restablecer la contraseña. correo electrónico enviado!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(AccountActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this, "¡Error al enviar el correo electrónico de restablecimiento!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
                 } else {
-                    oldEmail.setError("Enter email");
+                    oldEmail.setError("Ingrese correo electrónico");
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -212,12 +235,12 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(AccountActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this, "Su perfil ha sido eliminado :( ¡Cree una cuenta ahora!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(AccountActivity.this, SignupActivity.class));
                                         finish();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(AccountActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this, "¡Error al eliminar tu cuenta!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
@@ -277,14 +300,13 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     @NonNull
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.escanear:
-                Intent i = new Intent( AccountActivity.this,LoginActivity.class );
-                startActivity( i );
-                break;
             case R.id.inicio:
-                Intent intent1= new Intent(AccountActivity.this,MainActivity.class);
-                startActivity(intent1);
-                //  Toast.makeText( this,"comandos de voz",Toast.LENGTH_SHORT ).show();
+                Intent inicio= new Intent(AccountActivity.this,MainActivity.class);
+                startActivity(inicio);
+                break;
+
+            case R.id.escanear:
+                Toast.makeText(this, "Escaner", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.configuracion:

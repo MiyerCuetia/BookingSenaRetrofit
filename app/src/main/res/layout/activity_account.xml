@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AccountActivity"
+    android:background="@drawable/bg_login"
     android:id="@+id/navigation_account">
 
     <LinearLayout
@@ -31,91 +32,97 @@
                 android:id="@+id/old_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/et_bg"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
-
+                android:padding="16dp"
+                android:textColorHint="@color/login_form_details"
+                android:singleLine="true"
+                android:maxLines="1" />
             <EditText
                 android:id="@+id/new_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/et_bg"
                 android:hint="@string/hint_new_email"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:padding="16dp"
+                android:textColorHint="@color/login_form_details"
+                android:singleLine="true"
+                android:maxLines="1" />
 
-            <EditText
-                android:id="@+id/password"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_newPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:hint="@string/hint_password"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:layout_marginTop="16dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="false"
+                app:passwordToggleDrawable="@drawable/show_password_selector"
+                app:passwordToggleTint="@color/login_form_details">
 
-            <EditText
-                android:id="@+id/newPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:hint="@string/new_pass"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/et_bg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/new_pass"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:padding="16dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/login_form_details" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/changeEmail"
-                style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/btn_bg"
                 android:text="@string/btn_change"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
+                android:textAllCaps="false"
+                android:textColor="@color/login_form_details_medium" />
             <Button
                 android:id="@+id/changePass"
-                style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/btn_bg"
                 android:text="@string/btn_change"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
+                android:textAllCaps="false"
+                android:textColor="@color/login_form_details_medium" />
             <Button
                 android:id="@+id/send"
-                style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/btn_bg"
                 android:text="@string/btn_send"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textAllCaps="false"
+                android:textColor="@color/login_form_details_medium" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="gone" />
-
             <Button
                 android:id="@+id/remove"
-                style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/btn_bg"
                 android:text="@string/btn_remove"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textAllCaps="false"
+                android:textColor="@color/login_form_details_medium" />
+
 
             <Button
                 android:id="@+id/change_email_button"
@@ -171,14 +178,15 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         app:menu="@menu/drawer"
         app:headerLayout="@layout/nav_header"
-        app:itemTextColor="@color/primary_text">
-
-    </com.google.android.material.navigation.NavigationView>
+        app:itemBackground="@drawable/drawer_background_selector"
+        app:itemIconTint="@drawable/drawer_selector"
+        app:itemTextColor="@drawable/drawer_selector"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
