@@ -66,6 +66,8 @@ public class Reserva extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_reserva);
         showToolbar("Reserva - Introducir datos", true);
 
+
+
         idAlojamiento = getIntent().getExtras().getInt("idAlojamiento");
         idUsuarioAuth = 1;
 
@@ -75,6 +77,8 @@ public class Reserva extends AppCompatActivity implements View.OnClickListener {
         etResEstado = (EditText) findViewById(R.id.et_resEstado);
         etResPago = (EditText) findViewById(R.id.et_resPago);
 
+        instanciasCalendar();
+
         btnCancelarReserva = (Button) findViewById(R.id.btn_cancelReserva);
         btnCrearReserva = (Button) findViewById(R.id.btn_crearReserva);
 
@@ -83,7 +87,7 @@ public class Reserva extends AppCompatActivity implements View.OnClickListener {
         btnCancelarReserva.setOnClickListener(this);
         btnCrearReserva.setOnClickListener(this);
 
-        instanciasCalendar();
+
     }
 
     public void showToolbar(String title, boolean upButton) {
@@ -113,7 +117,7 @@ public class Reserva extends AppCompatActivity implements View.OnClickListener {
         anio = calendario.get(Calendar.YEAR);
 
         //Agregamos fecha registro la fecha actuañ
-        final String fechaSeleccionada = anio + "-" + twoDigits(mes) + "-" + twoDigits(dia);
+         String fechaSeleccionada = anio + "-" + twoDigits(mes) + "-" + twoDigits(dia);
         etResFechaRegistro.setText(fechaSeleccionada);
     }
 
@@ -188,7 +192,7 @@ public class Reserva extends AppCompatActivity implements View.OnClickListener {
                     Double ResPago = Double.valueOf(etResPago.getText().toString());
 
                     ReservaUtilPostVO reservaUtilPostVO = new ReservaUtilPostVO(fechaRegistro, fechaLlegada, fechaSalida,
-                                                        null, null, ResEstado, ResPago,
+                                                        "", "", ResEstado, ResPago,
                                                         new AlojamientoUtilPostVO(idAlojamiento),new UsuarioUtilPostVO(idUsuarioAuth),
                                                         new UsuarioUtilPostVO(idUsuarioAuth),new UsuarioUtilPostVO(idUsuarioAuth));
 
